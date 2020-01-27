@@ -1,10 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello World</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Hello World</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<p th:text="'Message: ' + ${message}" />
+	<h1 th:text="${title}"></h1>
+	<p th:text="${description}">
+	<h2>Local</h2>
+	<p>
+		Message: <span th:text="${mvc.message}"></span>
+	<p>
+		Local Date/Time: <span th:text="${mvc.dateTime}"></span>
+	<p>
+		Host Name: <span th:text="${mvc.hostName}"></span>
+	<p>
+		Host Address: <span th:text="${mvc.hostAddress}"></span>
+	<p>
+		Exception: <span th:text="${mvc.exception}"></span>
+	<h2>Remote</h2>
+	<p>
+		URL: <span th:text="${mvc.restUrl}"></span>
+	<p>
+		Message: <span th:text="${mvc.restModel.message}"></span>
+	<p>
+		Local Date/Time: <span th:text="${mvc.restModel.dateTime}"></span>
+	<p>
+		Host Name: <span th:text="${mvc.restModel.hostName}"></span>
+	<p>
+		Host Address: <span th:text="${mvc.restModel.hostAddress}"></span>
+	<p>
+		Exception: <span th:text="${mvc.restModel.exception}"></span>
 </body>
 </html>
