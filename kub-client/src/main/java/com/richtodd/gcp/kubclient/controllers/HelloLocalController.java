@@ -53,6 +53,10 @@ public class HelloLocalController {
 				mvcModel.setException(e.getMessage());
 			}
 		}
+		
+		if (mvcModel.getRestModel() == null) {
+			mvcModel.setRestModel(new HelloWorldRestModel());
+		}
 
 		// Specify the Thymeleaf template binding values.
 		//

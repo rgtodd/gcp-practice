@@ -55,9 +55,12 @@ public class HelloConfigController {
 				HelloWorldRestModel restModel = m_restTemplate.getForObject(url, HelloWorldRestModel.class);
 				mvcModel.setRestModel(restModel);
 			} catch (RestClientException e) {
-				mvcModel.setRestModel(new HelloWorldRestModel());
 				mvcModel.setException(e.getMessage());
 			}
+		}
+
+		if (mvcModel.getRestModel() == null) {
+			mvcModel.setRestModel(new HelloWorldRestModel());
 		}
 
 		// Specify the Thymeleaf template binding values.

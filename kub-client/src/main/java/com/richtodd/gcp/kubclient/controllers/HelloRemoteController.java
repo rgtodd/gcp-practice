@@ -15,15 +15,15 @@ import com.richtodd.gcp.kubclient.models.HelloWorldMvcModel;
 import com.richtodd.gcp.kubserver.models.HelloWorldRestModel;
 
 @Controller
-public class HelloServerController {
+public class HelloRemoteController {
 
 	private final RestTemplate m_restTemplate;
 
-	public HelloServerController(RestTemplateBuilder restTemplateBuilder) {
+	public HelloRemoteController(RestTemplateBuilder restTemplateBuilder) {
 		m_restTemplate = restTemplateBuilder.build();
 	}
 
-	@GetMapping("/server")
+	@GetMapping("/remote")
 	public String helloLocal(Model model) {
 
 		// Specify URL of REST server.
@@ -52,6 +52,10 @@ public class HelloServerController {
 			} catch (RestClientException e) {
 				mvcModel.setException(e.getMessage());
 			}
+		}
+		
+		if (mvcModel.getRestModel() == null) {
+			mvcModel.setRestModel(new HelloWorldRestModel());
 		}
 
 		// Specify the Thymeleaf template binding values.
