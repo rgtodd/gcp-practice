@@ -199,10 +199,9 @@ docker stop kub-server
 
 In order to consume the Docker images in a Kubernetes environment, they should be published to a image repository.
 
-If you do not have an account on Docker Hub, go to https://hub.docker.com/ and create one. 
-```
-
-Then tag your images appropriately:
+If you do not have an account on Docker Hub, go to https://hub.docker.com/ and create one.
+ 
+Then, tag your images appropriately:
 
 ```
 docker tag kub-client <userId>/kub-client
