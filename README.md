@@ -14,7 +14,7 @@ kub-client has three views.  They are identical except in the way the kub-server
 
 * config: Calls kub-server via http://<service.name>:8081/helloworld where <service.name> is determine by the service.name application property. 
 
-## Building the Applications
+## Build the Applications
 
 The code can be obtained by cloning the following GitHub repository:
 
@@ -39,7 +39,7 @@ When complete, the following JAR files should exist:
 * ~/git/gcp-practice/kub-client/target/kub-client-0.0.1-SNAPSHOT.jar
 * ~/git/gcp-practice/kub-server/target/kub-server-0.0.1-SNAPSHOT.jar
 
-## Running Locally
+## Run Locally
 
 To run the program locally, open a terminal window and run the following program:
 
@@ -120,7 +120,7 @@ You should see a similar page.  However, the server name is now determined by th
 service.name = localhost
 ```
 
-## Running in Docker
+## Run in Docker
 
 Run the following commands to build Docker images for the programs:
 
@@ -195,7 +195,17 @@ docker stop kub-client
 docker stop kub-server
 ```
 
-## Running in Minikube
+## Install Minikube
+
+Minikube is a single-node Kubernetes cluster that can be used on local development machines.  Installation instructions can be found at https://kubernetes.io/docs/tasks/tools/install-minikube/.
+
+Once installed, start Minikube and launch the dashboard using:
+
+```
+minikube dashboard
+```
+
+## Run in Minikube
 
 In order to consume the Docker images in a Kubernetes environment, they should be published to a image repository.
 
@@ -218,25 +228,12 @@ docker push <userId>/kub-client
 docker push <userId>/kub-server
 ```
 
-Start Minikube.  If running Minikube for the first time, use the profile option to specify the virtualization environment to be used.  If you have VirtualBox installed, specify:
+You can deploy your images by clicking the + icon on the top menu bar.
 
-```
-minikube start --profile="virtualbox"
-```
+First, deploy kub-client:
 
-Otherwise, specify:
+![Minikube - Create kub-client deployment](minikube-kub-client.png)
 
-```
-minikube start
-```
-
-Once Minikube has started, launch the dashboard as follows:
-
-```
-minikube dashboard
-```
-
-You can deploy your images by clicking the + icon on the top menu bar
+Then, deploy kub-server:
 
 ![Minikube - Create kub-server deployment](minikube-kub-server.png)
-
