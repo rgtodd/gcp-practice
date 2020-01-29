@@ -14,6 +14,15 @@ kub-client has three views.  They are identical except in the way the kub-server
 
 * config: Calls kub-server via http://<service.name>:8081/helloworld where <service.name> is determine by the service.name application property. 
 
+In this document
+
+* [Build the Applications](#build-the-applications)
+* [Run Locally](#run-locally)
+* [Run in Docker](#run-in-docker)
+* [Install Minikube](#install-minikube)
+* [Run in Minikube](#run-in-minikube)
+* [Creating a ConfigSet](#creating-a-configset)
+
 ## Build the Applications
 
 The code can be obtained by cloning the following GitHub repository:
@@ -77,7 +86,7 @@ http://localhost:8080/local
 
 You should see output like the following:
 
-<div style="background-color:lightyellow; padding:1px 20px 1px 20px">
+<div class="bg-blue-light">
 	<h1>Hello Local</h1>
 	<p>Calls a REST service on localhost using a hard-coded URL.</p><h2>Local</h2>
 	<p>
@@ -157,7 +166,7 @@ http://localhost:8080/remote
 
 The following page will be shown:
 
-<div style="background-color:lightyellow; padding:1px 20px 1px 20px">
+<div background="lightyellow">
 	<h1>Hello Server</h1>
 	<p>Calls a REST service on kub-server using a hard-coded URL.</p><h2>Local</h2>
 	<p>
@@ -270,7 +279,7 @@ http://192.168.99.101:31170/remote
 
 The following page will be shown:
 
-<div style="background-color:lightyellow; padding:1px 20px 1px 20px">
+<div background="lightyellow">
 <h1>Hello Server</h1>
 	<p>Calls a REST service on kub-server using a hard-coded URL.<h2>Local</h2>
 	<p>
@@ -407,7 +416,7 @@ kubectl rollout restart Deployment kub-client
 
 Accessing the **config** page should now display properly:
 
-<div style="background-color:lightyellow; padding:1px 20px 1px 20px">
+<div background="lightyellow">
 	<h1>Hello Config</h1>
 	<p>Calls a REST service using a configuration-based URL.<h2>Local</h2>
 	<p>
