@@ -86,7 +86,7 @@ http://localhost:8080/local
 
 You should see output like the following:
 
-<div class="bg-blue-light">
+<table><tr><td>
 	<h1>Hello Local</h1>
 	<p>Calls a REST service on localhost using a hard-coded URL.</p><h2>Local</h2>
 	<p>
@@ -113,7 +113,7 @@ You should see output like the following:
 	</p><p>
 		Exception: <span></span>
 </p>
-</div>
+</td></tr></table>
 
 This page indicates that kub-client has successfully called kub-server using the hard-coded link http://localhost:8081/helloworld.
 
@@ -166,7 +166,7 @@ http://localhost:8080/remote
 
 The following page will be shown:
 
-<div background="lightyellow">
+<table><tr><td>
 	<h1>Hello Server</h1>
 	<p>Calls a REST service on kub-server using a hard-coded URL.</p><h2>Local</h2>
 	<p>
@@ -193,7 +193,7 @@ The following page will be shown:
 	</p><p>
 		Exception: <span></span>
 </p>
-</div>
+</td></tr></table>
 
 When complete, stop the docker containers:
 
@@ -279,7 +279,7 @@ http://192.168.99.101:31170/remote
 
 The following page will be shown:
 
-<div background="lightyellow">
+<table><tr><td>
 <h1>Hello Server</h1>
 	<p>Calls a REST service on kub-server using a hard-coded URL.<h2>Local</h2>
 	<p>
@@ -305,7 +305,7 @@ The following page will be shown:
 		Host Address: <span>172.17.0.4</span>
 	<p>
 		Exception: <span></span>
-</div>
+</td></tr></table>
 
 ## Creating a ConfigSet
 
@@ -416,7 +416,7 @@ kubectl rollout restart Deployment kub-client
 
 Accessing the **config** page should now display properly:
 
-<div background="lightyellow">
+<table><tr><td>
 	<h1>Hello Config</h1>
 	<p>Calls a REST service using a configuration-based URL.<h2>Local</h2>
 	<p>
@@ -442,4 +442,4 @@ Accessing the **config** page should now display properly:
 		Host Address: <span>172.17.0.7</span>
 	<p>
 		Exception: <span></span>
-</div>
+</td></tr></table>
