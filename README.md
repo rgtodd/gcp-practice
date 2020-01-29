@@ -33,7 +33,7 @@ https://github.com/rgtodd/gcp-practice.git
 
 Both kub-client and kub-server can be built using the following Maven commands:
 
-```
+```bash
 cd ~/git/gcp-practice/kub-client
 mvn clean package 
 
@@ -54,13 +54,13 @@ When complete, the following JAR files should exist:
 
 To run the program locally, open a terminal window and run the following program:
 
-```
+```bash
 java -jar ~/git/gcp-practice/kub-client/target/kub-client-0.0.1-SNAPSHOT.jar
 ```
 
 In a second window, run the following program:
 
-```
+```bash
 java -jar ~/git/gcp-practice/kub-server/target/kub-server-0.0.1-SNAPSHOT.jar
 ```
 
@@ -125,7 +125,7 @@ http://localhost:8080/config
 
 You should see a similar page.  However, the server name is now determined by the following entry in the **application.properties** resource file:
 
-```
+```properties
 service.name = localhost
 ```
 
@@ -133,27 +133,27 @@ service.name = localhost
 
 Run the following commands to build Docker images for the programs:
 
-```
+```bash
 docker build -t kub-client ~/git/gcp-practice/kub-client/.
 docker build -t kub-server ~/git/gcp-practice/kub-server/.
 ```
 
 Create a user-defined network that will allow the two containers to communicate with each other:
 
-```
+```bash
 docker network create kub-network
 ```
 
 Create containers for each of the docker images:
 
-```
+```bash
 docker create --name kub-client --network kub-network --publish 8080:8080 kub-client
 docker create --name kub-server --network kub-network kub-server
 ```
 
 These containers can then be started:
 
-```
+```bash
 docker start kub-client
 docker start kub-server
 ```
@@ -197,7 +197,7 @@ The following page will be shown:
 
 When complete, stop the docker containers:
 
-```
+```bash
 docker stop kub-client
 docker stop kub-server
 ```
@@ -208,7 +208,7 @@ Minikube is a single-node Kubernetes cluster that can be used on local developme
 
 Once installed, start Minikube and launch the dashboard using:
 
-```
+```bash
 minikube dashboard
 ```
 
@@ -224,10 +224,9 @@ If you do not have an account on Docker Hub, go to https://hub.docker.com/ and c
  
 Then, tag your images appropriately:
 
-```
+```bash
 docker tag kub-client <userId>/kub-client
 docker tag kub-server <userId>/kub-server
-
 ```
 
 **NOTE**
@@ -236,7 +235,7 @@ docker tag kub-server <userId>/kub-server
 
 You can then push your images to the repository:
 
-```
+```bash
 docker push <userId>/kub-client
 docker push <userId>/kub-server
 ```
@@ -257,7 +256,7 @@ These service options cause a ClusterIP service to be created for port 8081.  Mi
 
 Use the following command to obtain the external IP address of the kub-client service:
 
-```
+```bash
 minikube service kub-client
 ```
 
@@ -311,7 +310,7 @@ The following page will be shown:
 
 When we ran the program locally, the **config** page determined the name of the REST server using the following **application.properties** resource file entry: 
 
-```
+```properties
 service.name = localhost
 ```
 
@@ -319,7 +318,7 @@ We can modify the behavior of the **config** page by creating a ConfigSet that o
 
 Use the following command to verify that kubectl is  configured to target your Minikube environment:
 
-```
+```bash
 kubectl config get-contexts
 ```
 
@@ -336,13 +335,13 @@ CURRENT   NAME                                                        CLUSTER   
 
 If minikube is not the current context, switch to it using the following command:
 
-```
+```bash
 kubectl config use-context minikube
 ```
 
 The YAML file kub-client-configmap.yaml contains a ConfigMap definition:
 
-``` yaml
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -354,14 +353,14 @@ data:
 
 Apply this resource to your Minikube environment:
 
-```
+```bash
 kubectl apply -f ~/git/gcp-practice/kub-client-configmap.yaml 
 kubectl rollout restart Deployment kub-client
 ```
 
 However, these changes will often not take affect.  Review the logs of the kub-client deployment:
 
-```
+```bash
 kubectl logs deployment/kub-client
 ```
 
@@ -369,12 +368,11 @@ The following message indicates the service account associated with the kub-clie
 
 ```
 io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://10.96.0.1/api/v1/namespaces/default/configmaps/kub-client. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. configmaps "kub-client" is forbidden: User "system:serviceaccount:default:default" cannot get resource "configmaps" in API group "" in the namespace "default".
-
 ```
 
 The YAML file kub-client-role.yaml contains a new Role definition that provices access to this service:
 
-```
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -409,7 +407,7 @@ subjects:
 
 Apply this resource to the cluster: 
 
-```
+```bash
 kubectl apply -f ~/git/gcp-practice/kub-client-role.yaml 
 kubectl rollout restart Deployment kub-client
 ```
